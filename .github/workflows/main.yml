@@ -32,17 +32,14 @@ jobs:
     steps:
       - name: Checkout do código fonte
         uses: actions/checkout@v4.1.7
-
       - name: Configuração do AWS CLI
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      
       - name: Configuração do Kube Config
-        run: aws eks updatekubeconfig --name aula-eks
-
+        run: aws eks update-kubeconfig --name aula-eks
       - name: Deploy no Kubernetes
       - uses: Azure/k8s-deploy@v5.0.0
         with:
